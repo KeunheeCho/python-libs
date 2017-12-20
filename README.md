@@ -1,5 +1,6 @@
 # python-libs
 
-* signal
-* tendon
+* signal analysis
 * section analysis
+* tendon analysis
+* several utils
