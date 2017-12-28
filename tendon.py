@@ -13,11 +13,13 @@ import my.util
 
 def strand(e, cw, hw, Ap=138.7):
     """
-    e: strain vector
-    cw: properties of core wire, {'fn': function_name, 'fa': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio}
-    hw: properties of helical wire, {'fn': function_name, 'fa': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio, 'p': pitch_length}
-    Ap: strand area
-    s: stress vector
+    Calculate stress of a strand composed with 2 materials
+
+    : param e: strain vector
+    : param cw: properties of core wire, {'fn': function_name, 'fa': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio}
+    : param hw: properties of helical wire, {'fn': function_name, 'fa': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio, 'p': pitch_length}
+    : param Ap: strand area
+    : returns s: stress vector
     """
 
     R1 = cw['D'] / 2
