@@ -39,8 +39,22 @@ def strand(e, cw, hw, Ap=138.7):
 
 
 class Tendon:
+    """
+    Tendon force distribution for a given tendon profile
+    """
 
     def __init__(self, Ep, Ap, t, x, y, z, active='R', k=2):  # active: 'L'eft / 'R'ight / 'B'oth
+        """
+        Initialize Tendon class
+        :param Ep: Elastic modulus of tendon
+        :param Ap: Area of tendon
+        :param t: Parametric representation of (x, y, z)
+        :param x: x-coordinates of tendon
+        :param y: y-coordinates of tendon
+        :param z: z-coordinates of tendon
+        :param active: 'L'eft when prestressing at the minimum of t, 'R'ight when prestressing at the maximum of t, 'B'oth when presstressing at both ends
+        :param k: degree of interpolation function for tendon
+        """
         #
         self.Ep = Ep
         self.Ap = Ap
