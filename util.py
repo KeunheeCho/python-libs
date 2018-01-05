@@ -11,8 +11,22 @@ import openpyxl as xl
 
 
 class LinearPhysicalProgramming:
+    """
+
+    """
 
     def __init__(self, problems):
+        """
+        class LinearPhyiscalProgramming 초기화
+        :param problems: dictionary의 list, [ {'class': class1, 'metric': metric1}, {'class': class2, 'metric': metric2}, ]
+            class : metric
+            'SIBS' (small is better solution, soft) : [m0, m1, m2, m3, m4]
+            'LIBS' (large is better solution, soft) : [m0, m1, m2, m3, m4]
+            'CIBS' (center is better solution, soft) : [m0, m1, ..., m8] or [m0, m1, ..., m9]
+            'SIBH' (small is better solution, hard) : [m0] or m0
+            'LIBH' (large is better solution, hard) : [m0] or m0
+            'CIBH' (center is better solution, hard) : [m0, m1]
+        """
         self.nps = len(problems)
         self.id = {'SIBS': list(), 'LIBS': list(), 'CIBS': list(), 'SIBH': list(), 'LIBH': list(), 'CIBH': list()}
         self.px = {'SIB': np.zeros((self.nps, 5)), 'LIB': np.zeros((self.nps, 5))}
