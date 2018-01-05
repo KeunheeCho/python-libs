@@ -50,8 +50,18 @@ class BiLinear(MaterialBase):
 
 
 class Mattock(MaterialBase):
+    """
+    Menegotto-Pinto 형태의 bilinear 곡선 모델
+    """
 
     def __init__(self, E1, A, B, C):
+        """
+        Mattock 모델 상수 초기화
+        :param E1: 초기 기울기
+        :param A: = E2 / E1
+        :param B: = E1 / fo = 1 / eo, (eo, fo)는 두 점근선 간 교차점
+        :param C: 두 점근선 간 교차점 부위의 곡선 형태, 클수록 뾰족해짐
+        """
         self.E1 = E1
         self.A = A
         self.B = B
