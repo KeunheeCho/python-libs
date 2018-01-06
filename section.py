@@ -96,7 +96,7 @@ class SectionAnalysis:
     def _init_section_analysis(self):
         self.results = dict()
         print('-- Processing input data')
-        ## keyword: Section
+        # keyword: Section
         self.cells = dict()
         self.set_active = set()
         sections = self.sa['Section']
@@ -123,7 +123,7 @@ class SectionAnalysis:
                     self.cells[section['Id'][i]] = {'Y': ys[i], 'A': va[i], 'M': {'fn': vfn, 'args': vargs}, 'e': 0.0, 's': 0.0}
                 if section['Active'] is True:
                     self.set_active.update(section['Id'])
-        ## keyword: Output
+        # keyword: Output
         self.output_filename = self.sa['Output']['File']
         self.set_output = set(self._convert_inplist_to_list(self.sa['Output']['Id']))
         with open(self.output_filename, 'w') as fout:
@@ -131,7 +131,7 @@ class SectionAnalysis:
             for i in self.set_output:
                 fout.write(',Strain(%d),Stress(%d)' % (i, i))
             fout.write(',Remark\n')
-        ## keyword: Tolerance
+        # keyword: Tolerance
         self.tol = self.sa['Tolerance']
 
     def _run_section_analysis(self, step_no):
@@ -299,9 +299,9 @@ class SectionAnalysis:
                 objc, jacc = objc_jacc(strain_inc, curvature_inc, cells, set_act, cells[mid], mval, force_ext - force_prestress, moment_ext - moment_prestress)
             return strain_inc, curvature_inc, lambda_inc
 
-        #----------------------------------------------------------------------
+        # ----------------------------------------------------------------------
 
-        ## keyword: Step
+        # keyword: Step
         if step_no is None:
             steps = self.sa['Step']
         else:
@@ -460,7 +460,7 @@ def check_point_in_polygon_by_crossing(p, vs):
 
     return bool(cn % 2 == 1)
 
-#===================================================================
+# ===================================================================
 
 # wn_PnPoly(): winding number test for a point in a polygon
 #     Input:  P = a point,
@@ -495,6 +495,7 @@ def check_point_in_polygon_by_winding(p, vs):
     # repeat the first vertex at end
     vs = tuple(vs[:]) + (vs[0],)
     # is_left(): tests if a point is Left|On|Right of an infinite line.
+
     def is_left(v1, v2, p):
         return (v2[0] - v1[0]) * (p[1] - v1[1]) - (p[0] - v1[0]) * (v2[1] - v1[1])
     # loop through all edges of the polygon

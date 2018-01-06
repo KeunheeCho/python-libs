@@ -3,6 +3,7 @@ import numpy as np
 import scipy.interpolate as interpolate
 import scipy.optimize as optimize
 
+import my.material
 import my.util
 
 
@@ -15,8 +16,8 @@ def strand(e, cw, hw, Ap=138.7):
     """심선과 측선이 다른 재료로 이루어진 강연선의 응력을 계산합니다.
 
     : param e: strain vector
-    : param cw: properties of core wire, {'fn': function_name, 'fa': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio}
-    : param hw: properties of helical wire, {'fn': function_name, 'fa': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio, 'p': pitch_length}
+    : param cw: properties of core wire, {'fn': function_name, 'args': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio}
+    : param hw: properties of helical wire, {'fn': function_name, 'args': [argument list of fn], 'D': diameter, 'nu': Poisson's ratio, 'p': pitch_length}
     : param Ap: strand area
     : returns s: stress vector
     """
@@ -31,8 +32,10 @@ def strand(e, cw, hw, Ap=138.7):
     nu2 = hw['nu']
     alpha2 = np.arctan(p2 / (2 * np.pi * r2))
     C1 = (r2 * np.tan(alpha2) ** 2 - nu1 * R1) / (r2 * np.tan(alpha2) ** 2 + r2 + nu2 * R2)
+    fncw = getattr(my.material, cw['fn'])
+    fnhw = getattr(my.material, hw['fn'])
 
-    s = (A1 * cw['fn'](e, *cw['fa']) + 6 * A2 * hw['fn'](C1 * e, *hw['fa']) * np.sin(alpha2)) / Ap
+    s = (A1 * fncw(e, *cw['args']) + 6 * A2 * fnhw(C1 * e, *hw['args']) * np.sin(alpha2)) / Ap
 
     return s
 
