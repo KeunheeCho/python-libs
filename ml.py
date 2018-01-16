@@ -140,4 +140,3 @@ def play_model(model_file, env_id):
         state = state_next
 
     print('Score: {:3.0f}'.format(score))
-
